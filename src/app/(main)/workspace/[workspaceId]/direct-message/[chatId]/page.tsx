@@ -12,8 +12,8 @@ import { getUserWorkspaceChannels } from '@/actions/get-user-workspace-channels'
 import { Workspace } from '@/types/app';
 
 const DirectMessage = async ({ params }: { params: { workspaceId: string; chatId: string } }) => {
-  // Await the params object
-  const { workspaceId, chatId } = await params;
+  // Use params directly without awaiting
+  const { workspaceId, chatId } = params;
 
   const userData = await getUserData();
   if (!userData) return redirect('/auth');
