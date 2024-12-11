@@ -57,3 +57,4 @@ const DirectMessage = async ({ params }: { params: { workspaceId: string; chatId
 };
 
 export default DirectMessage;
+
