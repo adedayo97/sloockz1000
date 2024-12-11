@@ -11,8 +11,14 @@ import {
 import { getUserWorkspaceChannels } from '@/actions/get-user-workspace-channels';
 import { Workspace } from '@/types/app';
 
-const DirectMessage = async ({ params }: { params: { workspaceId: string; chatId: string } }) => {
-  // Use params directly without awaiting
+interface DirectMessageProps {
+  params: {
+    workspaceId: string;
+    chatId: string;
+  };
+}
+
+const DirectMessage = async ({ params }: DirectMessageProps) => {
   const { workspaceId, chatId } = params;
 
   const userData = await getUserData();
@@ -31,25 +37,25 @@ const DirectMessage = async ({ params }: { params: { workspaceId: string; chatId
   );
 
   return (
-    <div className='hidden md:block'>
+    <div className="hidden md:block">
       <ChatGroup
         userData={userData}
-        type='DirectMessage'
+        type="DirectMessage"
         currentChannelData={currentChannelData}
         currentWorkspaceData={currentWorkspaceData}
         userWorkspaceData={userWorkspacesData as Workspace[]}
         slug={workspaceId}
         userWorkspaceChannels={userWorkspaceChannels}
         chatId={chatId}
-        socketUrl='/api/web-socket/direct-messages'
+        socketUrl="/api/web-socket/direct-messages"
         socketQuery={{
           channelId: currentChannelData?.id!,
           workspaceId: currentWorkspaceData?.id,
           recipientId: chatId,
         }}
-        apiUrl='/api/direct-messages'
-        headerTitle={'DIRECT MESSAGE'}
-        paramKey='recipientId'
+        apiUrl="/api/direct-messages"
+        headerTitle="DIRECT MESSAGE"
+        paramKey="recipientId"
         paramValue={chatId}
       />
     </div>
@@ -57,4 +63,5 @@ const DirectMessage = async ({ params }: { params: { workspaceId: string; chatId
 };
 
 export default DirectMessage;
+
 
