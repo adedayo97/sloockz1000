@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation';
-
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 
 import { getUserData } from '@/actions/get-user-data';
@@ -11,20 +10,17 @@ import {
 import { getUserWorkspaceChannels } from '@/actions/get-user-workspace-channels';
 import { Workspace } from '@/types/app';
 
-interface DirectMessageProps {
-  params: {
-    workspaceId: string;
-    chatId: string;
-  };
-}
-
-const DirectMessage = async ({ params }: DirectMessageProps) => {
-  const { workspaceId, chatId } = params;
-
+const DirectMessage = async ({
+  params: { chatId, workspaceId },
+}: {
+  params: { workspaceId: string; chatId: string };
+}) => {
   const userData = await getUserData();
+
   if (!userData) return redirect('/auth');
 
   const [userWorkspacesData] = await getUserWorkspaceData(userData.workspaces!);
+
   const [currentWorkspaceData] = await getCurrentWorkspaceData(workspaceId);
 
   const userWorkspaceChannels = await getUserWorkspaceChannels(
@@ -33,29 +29,29 @@ const DirectMessage = async ({ params }: DirectMessageProps) => {
   );
 
   const currentChannelData = userWorkspaceChannels.find(
-    (channel) => channel.id === chatId
+    channel => channel.id === chatId
   );
 
   return (
-    <div className="hidden md:block">
+    <div className='hidden md:block'>
       <ChatGroup
         userData={userData}
-        type="DirectMessage"
+        type='DirectMessage'
         currentChannelData={currentChannelData}
         currentWorkspaceData={currentWorkspaceData}
         userWorkspaceData={userWorkspacesData as Workspace[]}
         slug={workspaceId}
         userWorkspaceChannels={userWorkspaceChannels}
         chatId={chatId}
-        socketUrl="/api/web-socket/direct-messages"
+        socketUrl='/api/web-socket/direct-messages'
         socketQuery={{
           channelId: currentChannelData?.id!,
           workspaceId: currentWorkspaceData?.id,
           recipientId: chatId,
         }}
-        apiUrl="/api/direct-messages"
-        headerTitle="DIRECT MESSAGE"
-        paramKey="recipientId"
+        apiUrl='/api/direct-messages'
+        headerTitle={'DIRECT MESSAGE'}
+        paramKey='recipientId'
         paramValue={chatId}
       />
     </div>
@@ -63,6 +59,3 @@ const DirectMessage = async ({ params }: DirectMessageProps) => {
 };
 
 export default DirectMessage;
-
-
-
