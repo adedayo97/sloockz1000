@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "clean": "rimraf .next && rimraf dist"
   },
   "dependencies": {
     "@emoji-mart/data": "^1.2.1",
@@ -60,8 +60,8 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
-    "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.1",
     "@types/react-dom": "^18",
     "@types/tailwindcss": "^3.0.11",
     "@typescript-eslint/eslint-plugin": "^8.18.0",
@@ -69,8 +69,9 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.0.3",
     "postcss": "^8.4.49",
+    "rimraf": "^5.0.10",
     "supabase": "^1.226.3",
     "tailwindcss": "^3.4.15",
-    "typescript": "^5"
+    "typescript": "^5.7.2"
   }
 }

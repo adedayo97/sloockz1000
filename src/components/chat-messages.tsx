@@ -30,8 +30,9 @@ type ChatMessagesProps = {
 };
 
 const ChatMessages: FC<ChatMessagesProps> = ({apiUrl, chatId,name, paramKey, paramValue,socketQuery, socketUrl, type, userData, workspaceData,channelData,}) => {
-    const chatRef = useRef<ElementRef<'div'>>(null);
-    const bottomRef = useRef<ElementRef<'div'>>(null);
+    const chatRef = useRef<HTMLDivElement>(document.createElement('div'));
+    const bottomRef = useRef<HTMLDivElement>(document.createElement('div'));
+
     const queryKey = type === "Channel" ? `channel:${chatId}` : `direct_message:${chatId}`;
     const {data, status, fetchNextPage, hasNextPage, isFetchingNextPage} = useChatFetcher({
 
