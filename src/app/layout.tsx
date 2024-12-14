@@ -12,8 +12,8 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: 'Slackzz',
-  description: 'Slack clone codewithdayo',
+  title: 'GNAConnect',
+  description: 'gnaconnect',
 };
 export const revalidate = 0;
 

@@ -17,14 +17,14 @@ import { FcGoogle } from "react-icons/fc"
 import { MdOutlineAutoAwesome } from "react-icons/md";
 import { RxGithubLogo } from "react-icons/rx"
 import { z } from 'zod';
-
+import Image from 'next/image';
+import topRightImage from '@/public/top-right-image.png';
 
 const AuthPage = () => {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   const router = useRouter();
-
 
   useEffect(() => {
     const getCurrUser = async () => {
@@ -40,7 +40,6 @@ const AuthPage = () => {
     getCurrUser();
     setIsMounted(true);
   }, [router]);
-
 
   const formSchema = z.object({
     email: z.string().email().min(2, { message: 'Email must be 2 characters' }),
@@ -63,7 +62,6 @@ const AuthPage = () => {
     }
   }
 
-
   async function socialAuth(provider: Provider) {
     setIsAuthenticating(true);
     await supabaseBrowserClient.auth.signInWithOAuth({
@@ -76,17 +74,19 @@ const AuthPage = () => {
   }
   if(!isMounted) return null;
 
-
   return (
     <div className='min-h-screen p-5 grid text-center place-content-center bg-white'>
+      <div className='absolute top-0 right-0 m-4'>
+        <Image src="/image 1.jpg" width={70} height={70} alt='image 1' />
+      </div>
       <div className='max-w-[450px]'>
         <div className='flex justify-center items-center gap-3 mb-4'>
           <BsSlack size={30} />
-          <Typography  text="sloockz" variant="h2"/>
+          <Typography  text="GNAConnect" variant="h2"/>
 
         </div>
         <Typography
-          text='Sign in to your Sloockzz'
+          text='Sign in to your GNAConnect'
           variant='h2'
           className='mb-3'
         />
